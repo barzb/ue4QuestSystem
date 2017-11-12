@@ -76,3 +76,7 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+*.exp
+*.response
+*/Intermediate/*
+*/Plugins/*/Intermediate/*
