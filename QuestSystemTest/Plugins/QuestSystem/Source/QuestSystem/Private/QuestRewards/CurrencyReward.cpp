@@ -4,7 +4,7 @@
 #include "QuestSystem.h"
 
 
-void UCurrencyReward::Collect()
+void UCurrencyReward::CollectQuestReward()
 {
 	unimplemented();
 }

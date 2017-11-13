@@ -13,6 +13,6 @@ class QUESTSYSTEM_API UNoQuestRequirement : public UQuestPropertyBase, public IQ
 	GENERATED_BODY()
 	
 public:
-	virtual bool CheckRequirement() const override;
+	virtual bool CheckQuestRequirement() const override;
 
 };

@@ -21,5 +21,5 @@ public:
 	virtual FName GetPropertyName() const override;
 
 	UFUNCTION()
-	virtual void Collect() = 0;
+	virtual void CollectQuestReward() = 0;
 };

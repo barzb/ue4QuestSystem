@@ -73,7 +73,7 @@ bool UQuest::TryStartQuest(TScriptInterface<IQuestTakerInterface> QuestTaker)
 {
 	UpdateQuestStatus();
 
-	if (CheckRequirement())
+	if (CheckQuestRequirement())
 	{
 		QuestOwner = QuestTaker;
 		unimplemented();
@@ -110,7 +110,7 @@ TScriptInterface<IQuestTakerInterface> UQuest::GetQuestOwner() const
 }
 
 
-bool UQuest::CheckRequirement() const
+bool UQuest::CheckQuestRequirement() const
 {
 	if (GetQuestStatus() != EQuestStatus::QS_Available) {
 		return false;
@@ -118,7 +118,7 @@ bool UQuest::CheckRequirement() const
 
 	for (const TScriptInterface<IQuestRequirementInterface>& Requirement : Requirements)
 	{
-		if (Requirement->CheckRequirement() == false) {
+		if (Requirement->CheckQuestRequirement() == false) {
 			return false;
 		}
 	}
@@ -127,10 +127,15 @@ bool UQuest::CheckRequirement() const
 }
 
 
-void UQuest::Collect()
+void UQuest::ExecuteQuestTypeBehaviour()
+{
+	QuestType->ExecuteQuestTypeBehaviour();
+}
+
+void UQuest::CollectQuestReward()
 {
 	for (TScriptInterface<IQuestRewardInterface>& Reward : Rewards)
 	{
-		Reward->Collect();
+		Reward->CollectQuestReward();
 	}
 }

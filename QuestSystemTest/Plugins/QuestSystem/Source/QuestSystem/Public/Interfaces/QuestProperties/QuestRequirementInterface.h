@@ -22,5 +22,5 @@ public:
 	virtual FName GetPropertyName() const override;
 
 	UFUNCTION()
-	virtual bool CheckRequirement() const = 0;
+	virtual bool CheckQuestRequirement() const = 0;
 };

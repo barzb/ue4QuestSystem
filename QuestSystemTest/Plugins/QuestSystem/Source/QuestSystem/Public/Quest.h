@@ -117,20 +117,20 @@ public:
 
 #pragma region IQuestRequirementInterface
 public:
-	virtual bool CheckRequirement() const override;
+	virtual bool CheckQuestRequirement() const override;
 	
 #pragma endregion IQuestRequirementInterface
 
 
 #pragma region IQuestTypeInterface
 public:
-	
+	virtual void ExecuteQuestTypeBehaviour() override;
 #pragma endregion IQuestTypeInterface
 
 
 #pragma region IQuestRewardInterface
 public:
-	virtual void Collect() override;
+	virtual void CollectQuestReward() override;
 #pragma endregion IQuestRewardInterface
 
 };

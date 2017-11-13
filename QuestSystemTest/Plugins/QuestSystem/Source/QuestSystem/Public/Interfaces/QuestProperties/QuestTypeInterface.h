@@ -21,4 +21,6 @@ class QUESTSYSTEM_API IQuestTypeInterface : public IQuestPropertyInterface
 public:
 	virtual FName GetPropertyName() const override;
 
+	UFUNCTION()
+	virtual void ExecuteQuestTypeBehaviour() = 0;
 };

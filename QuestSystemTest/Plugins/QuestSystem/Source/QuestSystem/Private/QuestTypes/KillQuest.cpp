@@ -4,5 +4,7 @@
 #include "QuestSystem.h"
 
 
-
-
+void UKillQuest::ExecuteQuestTypeBehaviour()
+{
+	unimplemented();
+}

@@ -4,7 +4,7 @@
 #include "QuestSystem.h"
 
 
-bool UNoQuestRequirement::CheckRequirement() const
+bool UNoQuestRequirement::CheckQuestRequirement() const
 {
 	return true;
 }

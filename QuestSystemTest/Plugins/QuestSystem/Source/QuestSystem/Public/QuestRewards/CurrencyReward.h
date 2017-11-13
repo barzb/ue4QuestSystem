@@ -13,6 +13,6 @@ class QUESTSYSTEM_API UCurrencyReward : public UQuestPropertyBase, public IQuest
 	GENERATED_BODY()
 	
 public:
-	virtual void Collect() override;
+	virtual void CollectQuestReward() override;
 
 };

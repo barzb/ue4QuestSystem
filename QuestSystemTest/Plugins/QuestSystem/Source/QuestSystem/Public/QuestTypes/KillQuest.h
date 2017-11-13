@@ -11,8 +11,8 @@ UCLASS()
 class QUESTSYSTEM_API UKillQuest : public UQuestPropertyBase, public IQuestTypeInterface
 {
 	GENERATED_BODY()
-	
-	
-	
-	
+
+public:
+	virtual void ExecuteQuestTypeBehaviour() override;
+
 };
