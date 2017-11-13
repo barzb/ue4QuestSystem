@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "SubclassOf.h"
 
 #include "Interfaces/QuestInterface.h"
 #include "Interfaces/QuestProperties/QuestRepeatabilityInterface.h"
@@ -11,9 +12,8 @@
 #include "Interfaces/QuestProperties/QuestRewardInterface.h"
 #include "Interfaces/QuestProperties/QuestTypeInterface.h"
 
+#include "QuestPropertyBase.h"
 #include "Quest.generated.h"
-
-class UQuestPropertyBase;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnQuestStatusChangedSignature, EQuestStatus, NewQuestStatus);
 
@@ -40,7 +40,7 @@ protected:
 	FText Description;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Quest", meta = (MustImplement = "QuestTypeInterface"))
-	TSubclassOf<UQuestPropertyBase> TypeClass;
+	TSubclassOf<UQuestPropertyBase> QuestTypeClass;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Quest", meta = (MustImplement = "QuestRepeatabilityInterface"))
 	TSubclassOf<UQuestPropertyBase> RepeatabilityClass;
@@ -53,7 +53,7 @@ protected:
 
 private:
 	UPROPERTY()
-	TScriptInterface<IQuestTypeInterface> Type;
+	TScriptInterface<IQuestTypeInterface> QuestType;
 
 	UPROPERTY()
 	TScriptInterface<IQuestRepeatabilityInterface> Repeatability;

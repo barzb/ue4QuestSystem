@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Interface.h"
 #include "CoreMinimal.h"
 #include "QuestTakerInterface.h"
 #include "QuestInterface.generated.h"

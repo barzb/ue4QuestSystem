@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "QuestSystem.h"
 #include "Quest.h"
+#include "QuestSystem.h"
 #include "QuestPropertyBase.h"
 
 
@@ -42,7 +42,7 @@ void UQuest::UpdateQuestStatus()
 
 void UQuest::ConstructQuestType()
 {
-	Type = NewObject<UQuestPropertyBase>(this, TypeClass);
+	QuestType = NewObject<UQuestPropertyBase>(this, QuestTypeClass);
 }
 
 void UQuest::ConstructQuestRepeatability()

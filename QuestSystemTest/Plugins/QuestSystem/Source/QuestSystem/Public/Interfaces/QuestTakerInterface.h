@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Interface.h"
 #include "QuestTakerInterface.generated.h"
 
 // This class does not need to be modified.

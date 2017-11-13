@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Interface.h"
 #include "CoreMinimal.h"
 #include "QuestPropertyInterface.generated.h"
 

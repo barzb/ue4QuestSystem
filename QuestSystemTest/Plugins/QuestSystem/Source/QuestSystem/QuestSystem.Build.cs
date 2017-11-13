@@ -7,7 +7,7 @@ public class QuestSystem : ModuleRules
 	public QuestSystem(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"QuestSystem/Public"
