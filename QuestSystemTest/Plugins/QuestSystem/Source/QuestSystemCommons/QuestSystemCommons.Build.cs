@@ -11,7 +11,8 @@ public class QuestSystemCommons : ModuleRules
 
         PublicIncludePaths.AddRange(
             new string[] {
-                "QuestSystemCommons/Public"
+                "QuestSystemCommons/Public",
+                "QuestSystem/Public",
                 // ... add public include paths required here ...
             }
         );
@@ -20,6 +21,7 @@ public class QuestSystemCommons : ModuleRules
         PrivateIncludePaths.AddRange(
             new string[] {
                 "QuestSystemCommons/Private",
+                "QuestSystem/Private",
                 // ... add other private include paths required here ...
             }
         );
@@ -29,6 +31,7 @@ public class QuestSystemCommons : ModuleRules
             new string[]
             {
                 "Core",
+                "QuestSystem"
                 // ... add other public dependencies that you statically link with here ...
             }
         );

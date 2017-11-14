@@ -3,12 +3,12 @@
 #pragma once
 
 #include "QuestPropertyBase.h"
-#include "../Interfaces/QuestProperties/QuestTypeInterface.h"
+#include "QuestTypeInterface.h"
 #include "KillQuest.generated.h"
 
 
 UCLASS()
-class QUESTSYSTEM_API UKillQuest : public UQuestPropertyBase, public IQuestTypeInterface
+class QUESTSYSTEMCOMMONS_API UKillQuest : public UQuestPropertyBase, public IQuestTypeInterface
 {
 	GENERATED_BODY()
 

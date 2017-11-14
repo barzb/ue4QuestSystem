@@ -4,6 +4,7 @@
 #include "QuestSystem.h"
 #include "QuestPropertyBase.h"
 
+// v------------------ public -------------------v
 
 UQuest::UQuest()
 	: bInitialized(false)
@@ -25,49 +26,32 @@ void UQuest::Initialize()
 	}
 }
 
-void UQuest::ConstructQuestProperties()
+bool UQuest::IsQuestUnavailable() const
 {
-	ConstructQuestType();
-	ConstructQuestRepeatability();
-	ConstructQuestRequirements();
-	ConstructQuestRewards();
+	return GetQuestStatus() ==  EQuestStatus::QS_Unavailable;
 }
 
-void UQuest::UpdateQuestStatus()
+bool UQuest::CanQuestBeStarted() const
 {
-	unimplemented();
-
-	OnQuestStatusChanged.Broadcast(QuestStatus);
+	return GetQuestStatus() == EQuestStatus::QS_Available;
 }
 
-void UQuest::ConstructQuestType()
+bool UQuest::HasQuestStarted() const
 {
-	QuestType = NewObject<UQuestPropertyBase>(this, QuestTypeClass);
+	return GetQuestStatus() == EQuestStatus::QS_Started;
 }
 
-void UQuest::ConstructQuestRepeatability()
+bool UQuest::HasQuestEnded() const
 {
-	Repeatability = NewObject<UQuestPropertyBase>(this, RepeatabilityClass);
+	return GetQuestStatus() == EQuestStatus::QS_Ended;
 }
 
-void UQuest::ConstructQuestRequirements()
+bool UQuest::IsQuestAlreadyRewarded() const
 {
-	for (TSubclassOf<UQuestPropertyBase>& RequirementClass : RequirementClasses) {
-		Requirements.Add(NewObject<UQuestPropertyBase>(this, RequirementClass));
-	}
+	return GetQuestStatus() == EQuestStatus::QS_Rewarded;
 }
 
-void UQuest::ConstructQuestRewards()
-{
-	for (TSubclassOf<UQuestPropertyBase>& RewardClass : RewardClasses) {
-		Rewards.Add(NewObject<UQuestPropertyBase>(this, RewardClass));
-	}
-}
-
-bool UQuest::IsInitialized() const
-{
-	return bInitialized;
-}
+#pragma region IQuestInterface
 
 bool UQuest::TryStartQuest(TScriptInterface<IQuestTakerInterface> QuestTaker)
 {
@@ -109,10 +93,23 @@ TScriptInterface<IQuestTakerInterface> UQuest::GetQuestOwner() const
 	return QuestOwner;
 }
 
+#pragma endregion IQuestInterface
+
+#pragma region IQuestPropertyInterfaces
+
+void UQuest::ExecuteQuestTypeBehaviour()
+{
+	QuestType->ExecuteQuestTypeBehaviour();
+}
+
+void UQuest::EvaluateQuestRepeatability()
+{
+	Repeatability->EvaluateQuestRepeatability();
+}
 
 bool UQuest::CheckQuestRequirement() const
 {
-	if (GetQuestStatus() != EQuestStatus::QS_Available) {
+	if (CanQuestBeStarted() == false) {
 		return false;
 	}
 
@@ -126,16 +123,60 @@ bool UQuest::CheckQuestRequirement() const
 	return true;
 }
 
-
-void UQuest::ExecuteQuestTypeBehaviour()
-{
-	QuestType->ExecuteQuestTypeBehaviour();
-}
-
 void UQuest::CollectQuestReward()
 {
 	for (TScriptInterface<IQuestRewardInterface>& Reward : Rewards)
 	{
 		Reward->CollectQuestReward();
+	}
+}
+
+#pragma endregion IQuestPropertyInterfaces
+
+// v------------------ protected -------------------v
+
+void UQuest::UpdateQuestStatus()
+{
+	unimplemented();
+
+	OnQuestStatusChanged.Broadcast(QuestStatus);
+}
+
+bool UQuest::IsInitialized() const
+{
+	return bInitialized;
+}
+
+void UQuest::ConstructQuestProperties()
+{
+	ConstructQuestType();
+	ConstructQuestRepeatability();
+	ConstructQuestRequirements();
+	ConstructQuestRewards();
+}
+
+// v------------------ private -------------------v
+
+void UQuest::ConstructQuestType()
+{
+	QuestType = NewObject<UQuestPropertyBase>(this, QuestTypeClass);
+}
+
+void UQuest::ConstructQuestRepeatability()
+{
+	Repeatability = NewObject<UQuestPropertyBase>(this, RepeatabilityClass);
+}
+
+void UQuest::ConstructQuestRequirements()
+{
+	for (TSubclassOf<UQuestPropertyBase>& RequirementClass : RequirementClasses) {
+		Requirements.Add(NewObject<UQuestPropertyBase>(this, RequirementClass));
+	}
+}
+
+void UQuest::ConstructQuestRewards()
+{
+	for (TSubclassOf<UQuestPropertyBase>& RewardClass : RewardClasses) {
+		Rewards.Add(NewObject<UQuestPropertyBase>(this, RewardClass));
 	}
 }

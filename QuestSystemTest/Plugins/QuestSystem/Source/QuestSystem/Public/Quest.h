@@ -32,7 +32,6 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Quest")
 	FOnQuestStatusChangedSignature OnQuestStatusChanged;
 
-protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Quest")
 	FText Title;
 	
@@ -51,7 +50,70 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Quest", meta = (MustImplement = "QuestRewardInterface"))
 	TArray<TSubclassOf<UQuestPropertyBase>> RewardClasses;
 
+
+	UQuest();
+
+	void Initialize();
+
+	bool IsQuestUnavailable() const;
+
+	bool CanQuestBeStarted() const;
+
+	bool HasQuestStarted() const;
+
+	bool HasQuestEnded() const;
+
+	bool IsQuestAlreadyRewarded() const;
+
+#pragma region IQuestInterface
+	virtual bool TryStartQuest(TScriptInterface<IQuestTakerInterface> QuestTaker) override;
+
+	virtual void EndQuest(EQuestEndReason EndReason) override;
+
+	virtual EQuestStatus GetQuestStatus() const override;
+
+	virtual FText GetQuestTitle() const override;
+
+	virtual FText GetQuestDescription() const override;
+
+	virtual TScriptInterface<IQuestTakerInterface> GetQuestOwner() const override;
+#pragma endregion IQuestInterface
+
+
+#pragma region IQuestPropertyInterfaces
+	virtual void ExecuteQuestTypeBehaviour() override;
+	
+	virtual void EvaluateQuestRepeatability() override;
+
+	virtual bool CheckQuestRequirement() const override;
+	
+	virtual void CollectQuestReward() override;
+#pragma endregion IQuestPropertyInterfaces
+
+protected:
+	UFUNCTION()
+	virtual void UpdateQuestStatus();
+
+	UFUNCTION()
+	bool IsInitialized() const;
+
+	UFUNCTION()
+	virtual void ConstructQuestProperties();
+
 private:
+	UFUNCTION()
+	void ConstructQuestRewards();
+
+	UFUNCTION()
+	void ConstructQuestRequirements();
+
+	UFUNCTION()
+	void ConstructQuestRepeatability();
+
+	UFUNCTION()
+	void ConstructQuestType();
+
+
 	UPROPERTY()
 	TScriptInterface<IQuestTypeInterface> QuestType;
 
@@ -71,66 +133,4 @@ private:
 	EQuestStatus QuestStatus;
 
 	bool bInitialized;
-
-public:
-	UQuest();
-
-	void Initialize();
-
-protected:
-	virtual void ConstructQuestProperties();
-
-	virtual void UpdateQuestStatus();
-
-	bool IsInitialized() const;
-
-private:
-	void ConstructQuestRewards();
-
-	void ConstructQuestRequirements();
-
-	void ConstructQuestRepeatability();
-
-	void ConstructQuestType();
-
-#pragma region IQuestInterface
-public:
-	virtual bool TryStartQuest(TScriptInterface<IQuestTakerInterface> QuestTaker) override;
-
-	virtual void EndQuest(EQuestEndReason EndReason) override;
-
-	virtual EQuestStatus GetQuestStatus() const override;
-
-	virtual FText GetQuestTitle() const override;
-
-	virtual FText GetQuestDescription() const override;
-
-	virtual TScriptInterface<IQuestTakerInterface> GetQuestOwner() const override;
-#pragma endregion IQuestInterface
-
-
-#pragma region IQuestRepeatabilityInterface
-public:
-	
-#pragma endregion IQuestRepeatabilityInterface
-
-
-#pragma region IQuestRequirementInterface
-public:
-	virtual bool CheckQuestRequirement() const override;
-	
-#pragma endregion IQuestRequirementInterface
-
-
-#pragma region IQuestTypeInterface
-public:
-	virtual void ExecuteQuestTypeBehaviour() override;
-#pragma endregion IQuestTypeInterface
-
-
-#pragma region IQuestRewardInterface
-public:
-	virtual void CollectQuestReward() override;
-#pragma endregion IQuestRewardInterface
-
 };

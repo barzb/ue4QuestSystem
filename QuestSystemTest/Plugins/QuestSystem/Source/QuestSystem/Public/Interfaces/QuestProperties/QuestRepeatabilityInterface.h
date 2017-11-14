@@ -21,4 +21,6 @@ class QUESTSYSTEM_API IQuestRepeatabilityInterface : public IQuestPropertyInterf
 public:
 	virtual FName GetPropertyName() const override;
 	
+	UFUNCTION()
+	virtual void EvaluateQuestRepeatability() = 0;
 };

@@ -3,12 +3,12 @@
 #pragma once
 
 #include "QuestPropertyBase.h"
-#include "../Interfaces/QuestProperties/QuestRewardInterface.h"
+#include "QuestRewardInterface.h"
 #include "CurrencyReward.generated.h"
 
 
 UCLASS()
-class QUESTSYSTEM_API UCurrencyReward : public UQuestPropertyBase, public IQuestRewardInterface
+class QUESTSYSTEMCOMMONS_API UCurrencyReward : public UQuestPropertyBase, public IQuestRewardInterface
 {
 	GENERATED_BODY()
 	
