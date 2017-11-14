@@ -53,19 +53,19 @@ public:
 
 	UQuest();
 
-	void Initialize();
-
-	bool IsQuestUnavailable() const;
-
-	bool CanQuestBeStarted() const;
-
-	bool HasQuestStarted() const;
-
-	bool HasQuestEnded() const;
-
-	bool IsQuestAlreadyRewarded() const;
-
 #pragma region IQuestInterface
+	virtual void Initialize() override;
+
+	virtual bool IsQuestUnavailable() const override;
+
+	virtual bool CanQuestBeStarted() const override;
+
+	virtual bool HasQuestStarted() const override;
+
+	virtual bool HasQuestEnded() const override;
+
+	virtual bool IsQuestAlreadyRewarded() const override;
+
 	virtual bool TryStartQuest(TScriptInterface<IQuestTakerInterface> QuestTaker) override;
 
 	virtual void EndQuest(EQuestEndReason EndReason) override;

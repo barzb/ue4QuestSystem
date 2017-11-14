@@ -40,4 +40,22 @@ public:
 
 	UFUNCTION()
 	virtual TScriptInterface<IQuestTakerInterface> GetQuestOwner() const = 0;
+
+	UFUNCTION()
+	virtual void Initialize() = 0;
+
+	UFUNCTION()
+	virtual bool IsQuestUnavailable() const = 0;
+
+	UFUNCTION()
+	virtual bool CanQuestBeStarted() const = 0;
+
+	UFUNCTION()
+	virtual bool HasQuestStarted() const = 0;
+
+	UFUNCTION()
+	virtual bool HasQuestEnded() const = 0;
+
+	UFUNCTION()
+	virtual bool IsQuestAlreadyRewarded() const = 0;
 };

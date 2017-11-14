@@ -13,6 +13,8 @@ UQuest::UQuest()
 
 }
 
+#pragma region IQuestInterface
+
 void UQuest::Initialize()
 {
 	if (!IsInitialized())
@@ -50,8 +52,6 @@ bool UQuest::IsQuestAlreadyRewarded() const
 {
 	return GetQuestStatus() == EQuestStatus::QS_Rewarded;
 }
-
-#pragma region IQuestInterface
 
 bool UQuest::TryStartQuest(TScriptInterface<IQuestTakerInterface> QuestTaker)
 {
