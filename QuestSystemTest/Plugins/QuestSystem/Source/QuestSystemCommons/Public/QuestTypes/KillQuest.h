@@ -14,5 +14,4 @@ class QUESTSYSTEMCOMMONS_API UKillQuest : public UQuestPropertyBase, public IQue
 
 public:
 	virtual void ExecuteQuestTypeBehaviour() override;
-
 };

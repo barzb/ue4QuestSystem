@@ -50,7 +50,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Quest", meta = (MustImplement = "QuestRewardInterface"))
 	TArray<TSubclassOf<UQuestPropertyBase>> RewardClasses;
 
-
 	UQuest();
 
 #pragma region IQuestInterface
@@ -78,7 +77,6 @@ public:
 
 	virtual TScriptInterface<IQuestTakerInterface> GetQuestOwner() const override;
 #pragma endregion IQuestInterface
-
 
 #pragma region IQuestPropertyInterfaces
 	virtual void ExecuteQuestTypeBehaviour() override;
